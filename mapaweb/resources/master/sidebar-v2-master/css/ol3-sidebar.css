@@ -35,6 +35,9 @@
       right: 6px; } }
 .sidebar-tabs ul.tablist {
 display:none;}
+
+.sidebar-tabs ul[role="tablist"] {display:none;
+}
 .sidebar-tabs {
   top: 0;
   bottom: 0;
