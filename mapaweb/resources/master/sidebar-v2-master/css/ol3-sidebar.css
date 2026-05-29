@@ -36,7 +36,7 @@
 .sidebar-tabs ul.tablist {
 display:none;}
 
-.sidebar-tabs ul[role="tablist"] {display:none;
+.sidebar-tabs ul[role="tablist"]:first-of-type {display:none;
 }
 .sidebar-tabs {
   top: 0;
