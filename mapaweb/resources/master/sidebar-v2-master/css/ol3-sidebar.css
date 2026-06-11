@@ -33,16 +33,13 @@
   @media (min-width: 768px) {
     .sidebar-right {
       right: 6px; } }
-.sidebar-tabs ul.tablist {
-display:none;}
 
-.sidebar-tabs ul[role="tablist"]:first-of-type {display:none;
-}
 .sidebar-tabs {
   top: 0;
   bottom: 0;
   height: 100%;
-  background-color: #da5696; }
+  background-color: rgba(0, 60, 136, 0.5); }
+  /* background-color: rgba(0, 89, 179, 0.7); } */
   .sidebar-left .sidebar-tabs {
     left: 0; }
   .sidebar-right .sidebar-tabs {
@@ -52,7 +49,7 @@ display:none;}
     width: 40px;
     margin: 0;
     padding: 0;
-    list-style-type: none;}
+    list-style-type: none; }
     .sidebar-tabs > li, .sidebar-tabs > ul > li {
       width: 100%;
       height: 40px;
