@@ -1,7 +1,19 @@
 ol.proj.proj4.register(proj4);
-//ol.proj.get("EPSG:25831").setExtent([372160.351296, 4563621.106950, 415114.922256, 4598075.107939]);
+//ol.proj.get("EPSG:25831").setExtent([365175.322939, 4561120.147238, 413499.215268, 4599586.699102]);
 var wms_layers = [];
 
+var lyr_EsriTopographic = new ol.layer.Tile({
+            'title': 'Esri Topographic',
+            'baseLayer':'true',
+            'opacity': 1.000000,
+            
+            
+            source: new ol.source.XYZ({
+            attributions: ' ',
+                url: 'https://server.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+            })
+        });
+        
 var lyr_Basesatllit = new ol.layer.Tile({
             'title': 'Base satèl·lit',
             'baseLayer':'true',
@@ -38,71 +50,13 @@ var lyr_Basetopogrfica = new ol.layer.Tile({
     lyr_Basetopogrfica.setVisible(false);
     
 
-var lyr_LmitcomarcalAltPeneds = new ol.layer.Vector({
-    title: '<div class="roller-switcher"></div> LmitcomarcalAltPeneds',
-    source: new ol.source.Vector(), 
-    permalink: "LmitcomarcalAltPeneds",
-    popuplayertitle: 'Límit comarcal Alt Penedès',
-    creationdate: '2026-05-28 15:28:14',
-    interactive: false,
-    style: style_LmitcomarcalAltPeneds,
-});
-function load_LmitcomarcalAltPeneds_data() {
-    var format_LmitcomarcalAltPeneds = new ol.format.GeoJSON();
-    var features_LmitcomarcalAltPeneds = format_LmitcomarcalAltPeneds.readFeatures(json_LmitcomarcalAltPeneds, 
-    {dataProjection: 'EPSG:4326', featureProjection: 'EPSG:25831'});
-    var jsonSource_LmitcomarcalAltPeneds = new ol.source.Vector({
-    attributions: '<a class="legend"><img src="styles/legend/LmitcomarcalAltPeneds.png" /> <b>Límit comarcal Alt Penedès</b>'
-    });
-    lyr_LmitcomarcalAltPeneds.setSource(jsonSource_LmitcomarcalAltPeneds);
-    lyr_LmitcomarcalAltPeneds.set(
-    "title", '<img src="styles/legend/LmitcomarcalAltPeneds.png" /> Límit comarcal Alt Penedès'
-    );
-var featureCounter_LmitcomarcalAltPeneds = 1;
-jsonSource_LmitcomarcalAltPeneds.on('addfeature', function (event) {
-    var feature = event.feature;
-    feature.set("idO", featureCounter_LmitcomarcalAltPeneds++);
-    feature.set("layerObject", lyr_LmitcomarcalAltPeneds);
-});        
-jsonSource_LmitcomarcalAltPeneds.addFeatures(features_LmitcomarcalAltPeneds);
-}
-
-var lyr_Viari = new ol.layer.VectorImage({
-    title: '<div class="roller-switcher"></div> Viari',
-    source: new ol.source.Vector(), 
-    permalink: "Viari",
-    popuplayertitle: 'Viari',
-    creationdate: '2026-05-28 15:28:14',
-    interactive: false,
-    style: style_Viari,
-});
-function load_Viari_data() {
-    var format_Viari = new ol.format.GeoJSON();
-    var features_Viari = format_Viari.readFeatures(json_Viari, 
-    {dataProjection: 'EPSG:4326', featureProjection: 'EPSG:25831'});
-    var jsonSource_Viari = new ol.source.Vector({
-    attributions: '<a class="legend"><img src="styles/legend/Viari.png" /> <b>Viari</b>'
-    });
-    lyr_Viari.setSource(jsonSource_Viari);
-    lyr_Viari.set(
-    "title", '<img src="styles/legend/Viari.png" /> Viari'
-    );
-var featureCounter_Viari = 1;
-jsonSource_Viari.on('addfeature', function (event) {
-    var feature = event.feature;
-    feature.set("idO", featureCounter_Viari++);
-    feature.set("layerObject", lyr_Viari);
-});        
-jsonSource_Viari.addFeatures(features_Viari);
-}
-
 var lyr_Eixosconnectors = new ol.layer.VectorImage({
     title: '<div class="roller-switcher"></div> Eixosconnectors',
     source: new ol.source.Vector(), 
     permalink: "Eixosconnectors",
     popuplayertitle: 'Eixos connectors',
-    creationdate: '2026-05-28 15:28:14',
-    interactive: false,
+    creationdate: '2026-06-03 17:22:22',
+    interactive: true,
     style: style_Eixosconnectors,
 });
 function load_Eixosconnectors_data() {
@@ -148,40 +102,53 @@ jsonSource_Eixosconnectors.on('addfeature', function (event) {
 jsonSource_Eixosconnectors.addFeatures(features_Eixosconnectors);
 }
 
-var lyr_Nuclisdepoblaci = new ol.layer.Vector({
-    title: '<div class="roller-switcher"></div> Nuclisdepoblaci',
+var lyr_NodesdepoblaciAltPeneds = new ol.layer.Vector({
+    title: '<div class="roller-switcher"></div> NodesdepoblaciAltPeneds',
     source: new ol.source.Vector(), 
-    permalink: "Nuclisdepoblaci",
-    popuplayertitle: 'Nuclis de població',
-    creationdate: '2026-05-28 15:28:14',
-    interactive: true,
-    style: style_Nuclisdepoblaci,
+    permalink: "NodesdepoblaciAltPeneds",
+    popuplayertitle: 'Nodes de població Alt Penedès',
+    creationdate: '2026-06-03 17:22:22',
+    interactive: false,
+    style: style_NodesdepoblaciAltPeneds,
 });
-function load_Nuclisdepoblaci_data() {
-    var format_Nuclisdepoblaci = new ol.format.GeoJSON();
-    var features_Nuclisdepoblaci = format_Nuclisdepoblaci.readFeatures(json_Nuclisdepoblaci, 
+function load_NodesdepoblaciAltPeneds_data() {
+    var format_NodesdepoblaciAltPeneds = new ol.format.GeoJSON();
+    var features_NodesdepoblaciAltPeneds = format_NodesdepoblaciAltPeneds.readFeatures(json_NodesdepoblaciAltPeneds, 
     {dataProjection: 'EPSG:4326', featureProjection: 'EPSG:25831'});
-    var jsonSource_Nuclisdepoblaci = new ol.source.Vector({
-    attributions: '<a class="legend"><b>Nuclis de població</b><br />\
-        <img src="styles/legend/Nuclisdepoblaci_0.png" /> 0<br />\
-        <img src="styles/legend/Nuclisdepoblaci_1.png" /> 1<br />\
-        <img src="styles/legend/Nuclisdepoblaci_2.png" /> 2<br /></a>'
+    var jsonSource_NodesdepoblaciAltPeneds = new ol.source.Vector({
+    attributions: '<a class="legend"><b>Nodes de població Alt Penedès</b><br />\
+        <img src="styles/legend/NodesdepoblaciAltPeneds_0.png" /> 0 - 500 <br />\
+        <img src="styles/legend/NodesdepoblaciAltPeneds_1.png" /> 500 - 1000 <br />\
+        <img src="styles/legend/NodesdepoblaciAltPeneds_2.png" /> 1000 - 5000 <br />\
+        <img src="styles/legend/NodesdepoblaciAltPeneds_3.png" /> 5000 - 15000 <br />\
+        <img src="styles/legend/NodesdepoblaciAltPeneds_4.png" /> 15000 - 50000 <br />\
+        <img src="styles/legend/NodesdepoblaciAltPeneds_5.png" /> 50000 - 100000 <br /></a>'
         });
-    lyr_Nuclisdepoblaci.setSource(jsonSource_Nuclisdepoblaci);
-    lyr_Nuclisdepoblaci.set(
-    "title", '<div id="layertitle">Nuclis de població<br />\
+    lyr_NodesdepoblaciAltPeneds.setSource(jsonSource_NodesdepoblaciAltPeneds);
+    lyr_NodesdepoblaciAltPeneds.set(
+    "title", '<div id="layertitle">Nodes de població Alt Penedès<br />\
         <i class="fas fa-angle-up" id="secondImage"></i><i class="fas fa-angle-down" id="firstImage"></i></div><a class="layerlegend">\
-        <img src="styles/legend/Nuclisdepoblaci_0.png" /> 0<br />\
-        <img src="styles/legend/Nuclisdepoblaci_1.png" /> 1<br />\
-        <img src="styles/legend/Nuclisdepoblaci_2.png" /> 2<br /></a>'
+        <img src="styles/legend/NodesdepoblaciAltPeneds_0.png" /> 0 - 500 <br />\
+        <img src="styles/legend/NodesdepoblaciAltPeneds_1.png" /> 500 - 1000 <br />\
+        <img src="styles/legend/NodesdepoblaciAltPeneds_2.png" /> 1000 - 5000 <br />\
+        <img src="styles/legend/NodesdepoblaciAltPeneds_3.png" /> 5000 - 15000 <br />\
+        <img src="styles/legend/NodesdepoblaciAltPeneds_4.png" /> 15000 - 50000 <br />\
+        <img src="styles/legend/NodesdepoblaciAltPeneds_5.png" /> 50000 - 100000 <br /></a>'
         );
-var featureCounter_Nuclisdepoblaci = 1;
-jsonSource_Nuclisdepoblaci.on('addfeature', function (event) {
+var features_NodesdepoblaciAltPeneds_SinglePoint = []
+features_NodesdepoblaciAltPeneds.forEach(function(feature) {
+    var coords = feature.getGeometry().getCoordinates();
+    coords.forEach(function(coord) {
+        features_NodesdepoblaciAltPeneds_SinglePoint.push(new ol.Feature(new ol.geom.Point(coord)));
+    });
+});
+var featureCounter_NodesdepoblaciAltPeneds = 1;
+jsonSource_NodesdepoblaciAltPeneds.on('addfeature', function (event) {
     var feature = event.feature;
-    feature.set("idO", featureCounter_Nuclisdepoblaci++);
-    feature.set("layerObject", lyr_Nuclisdepoblaci);
-});        
-jsonSource_Nuclisdepoblaci.addFeatures(features_Nuclisdepoblaci);
+    feature.set("idO", featureCounter_NodesdepoblaciAltPeneds++);
+    feature.set("layerObject", lyr_NodesdepoblaciAltPeneds);
+});
+jsonSource_NodesdepoblaciAltPeneds.addFeatures(features_NodesdepoblaciAltPeneds_SinglePoint);
 }
 
 var lyr_Llocsdintersturstic = new ol.layer.Vector({
@@ -189,7 +156,7 @@ var lyr_Llocsdintersturstic = new ol.layer.Vector({
     source: new ol.source.Vector(), 
     permalink: "Llocsdintersturstic",
     popuplayertitle: 'Llocs d\'interès turístic',
-    creationdate: '2026-05-28 15:28:14',
+    creationdate: '2026-06-03 17:22:22',
     interactive: true,
     style: style_Llocsdintersturstic,
 });
@@ -218,7 +185,7 @@ var lyr_Polgonsdactivitateconmica = new ol.layer.Vector({
     source: new ol.source.Vector(), 
     permalink: "Polgonsdactivitateconmica",
     popuplayertitle: 'Polígons d\'activitat econòmica',
-    creationdate: '2026-05-28 15:28:14',
+    creationdate: '2026-06-03 17:22:22',
     interactive: true,
     style: style_Polgonsdactivitateconmica,
 });
@@ -247,7 +214,7 @@ var lyr_Nodesquotidianscomarcals = new ol.layer.Vector({
     source: new ol.source.Vector(), 
     permalink: "Nodesquotidianscomarcals",
     popuplayertitle: 'Nodes quotidians comarcals',
-    creationdate: '2026-05-28 15:28:14',
+    creationdate: '2026-06-03 17:22:22',
     interactive: true,
     style: style_Nodesquotidianscomarcals,
 });
@@ -276,7 +243,7 @@ var lyr_Centreseducatius = new ol.layer.Vector({
     source: new ol.source.Vector(), 
     permalink: "Centreseducatius",
     popuplayertitle: 'Centres educatius',
-    creationdate: '2026-05-28 15:28:14',
+    creationdate: '2026-06-03 17:22:22',
     interactive: true,
     style: style_Centreseducatius,
 });
@@ -305,7 +272,7 @@ var lyr_Estacionsferroviries = new ol.layer.Vector({
     source: new ol.source.Vector(), 
     permalink: "Estacionsferroviries",
     popuplayertitle: 'Estacions ferroviàries',
-    creationdate: '2026-05-28 15:28:14',
+    creationdate: '2026-06-03 17:22:22',
     interactive: true,
     style: style_Estacionsferroviries,
 });
@@ -332,10 +299,10 @@ jsonSource_Estacionsferroviries.addFeatures(features_Estacionsferroviries);
 // Funzione per caricare e aggiornare i layer uno alla volta
     // Array per i layer visibili/non visibili all'avvio (solo layer vettori e raster)
     var layersVisibleOnStart = [
-        {layer: lyr_LmitcomarcalAltPeneds, source: 'LmitcomarcalAltPeneds'},{layer: lyr_Eixosconnectors, source: 'Eixosconnectors'},{layer: lyr_Nuclisdepoblaci, source: 'Nuclisdepoblaci'},{layer: lyr_Llocsdintersturstic, source: 'Llocsdintersturstic'},{layer: lyr_Polgonsdactivitateconmica, source: 'Polgonsdactivitateconmica'},{layer: lyr_Nodesquotidianscomarcals, source: 'Nodesquotidianscomarcals'},{layer: lyr_Centreseducatius, source: 'Centreseducatius'},{layer: lyr_Estacionsferroviries, source: 'Estacionsferroviries'}
+        {layer: lyr_Eixosconnectors, source: 'Eixosconnectors'},{layer: lyr_NodesdepoblaciAltPeneds, source: 'NodesdepoblaciAltPeneds'},{layer: lyr_Llocsdintersturstic, source: 'Llocsdintersturstic'},{layer: lyr_Polgonsdactivitateconmica, source: 'Polgonsdactivitateconmica'},{layer: lyr_Nodesquotidianscomarcals, source: 'Nodesquotidianscomarcals'},{layer: lyr_Centreseducatius, source: 'Centreseducatius'},{layer: lyr_Estacionsferroviries, source: 'Estacionsferroviries'}
     ];
     var layersHiddenOnStart = [
-        {layer: lyr_Viari, source: 'Viari'}
+        
     ];
     // Funzione per caricare il JSON source
 	function loadJSON(fileName) {
@@ -390,7 +357,7 @@ jsonSource_Estacionsferroviries.addFeatures(features_Estacionsferroviries);
     });
 
 var group_NodesdintersPeneds = new ol.layer.Group({
-                                layers: [lyr_Nuclisdepoblaci,lyr_Llocsdintersturstic,lyr_Polgonsdactivitateconmica,lyr_Nodesquotidianscomarcals,lyr_Centreseducatius,lyr_Estacionsferroviries,],
+                                layers: [lyr_NodesdepoblaciAltPeneds,lyr_Llocsdintersturstic,lyr_Polgonsdactivitateconmica,lyr_Nodesquotidianscomarcals,lyr_Centreseducatius,lyr_Estacionsferroviries,],
                                 openInLayerSwitcher: true,
                                 title: 'Nodes d\'interès Penedès'});
 var group_PCCXarxaproposta = new ol.layer.Group({
@@ -398,30 +365,24 @@ var group_PCCXarxaproposta = new ol.layer.Group({
                                 openInLayerSwitcher: false,
                                 title: 'PCC Xarxa proposta'});
 
-lyr_Basesatllit.setVisible(false);lyr_Basetopogrfica.setVisible(true);lyr_LmitcomarcalAltPeneds.setVisible(true);lyr_Viari.setVisible(false);lyr_Eixosconnectors.setVisible(true);lyr_Nuclisdepoblaci.setVisible(true);lyr_Llocsdintersturstic.setVisible(true);lyr_Polgonsdactivitateconmica.setVisible(true);lyr_Nodesquotidianscomarcals.setVisible(true);lyr_Centreseducatius.setVisible(true);lyr_Estacionsferroviries.setVisible(true);
-var layersList = [lyr_Basesatllit,lyr_Basetopogrfica,lyr_LmitcomarcalAltPeneds,lyr_Viari,group_PCCXarxaproposta,group_NodesdintersPeneds];
-lyr_LmitcomarcalAltPeneds.set('fieldAliases', {'fid': 'fid', 'CODICOMAR': 'CODICOMAR', 'NOMCOMAR': 'NOMCOMAR', 'AREACOMAR': 'AREACOMAR', 'DATAALTA': 'DATAALTA', });
-lyr_Viari.set('fieldAliases', {'ID': 'ID', 'CODIVIA': 'CODIVIA', 'DENOMINACI': 'DENOMINACI', 'INICI': 'INICI', 'FINAL': 'FINAL', 'CODIEUROPA': 'CODIEUROPA', 'COMARCA': 'COMARCA', 'TITULAR': 'TITULAR', 'FUNCIONAL': 'FUNCIONAL', 'TECNICA': 'TECNICA', 'CONSERVACI': 'CONSERVACI', 'PATRIMONIA': 'PATRIMONIA', 'AUTORITZA': 'AUTORITZA', 'DATAACTUAL': 'DATAACTUAL', });
+lyr_EsriTopographic.setVisible(true);lyr_Basesatllit.setVisible(false);lyr_Basetopogrfica.setVisible(false);lyr_Eixosconnectors.setVisible(true);lyr_NodesdepoblaciAltPeneds.setVisible(true);lyr_Llocsdintersturstic.setVisible(true);lyr_Polgonsdactivitateconmica.setVisible(true);lyr_Nodesquotidianscomarcals.setVisible(true);lyr_Centreseducatius.setVisible(true);lyr_Estacionsferroviries.setVisible(true);
+var layersList = [lyr_EsriTopographic,lyr_Basesatllit,lyr_Basetopogrfica,group_PCCXarxaproposta,group_NodesdintersPeneds];
 lyr_Eixosconnectors.set('fieldAliases', {'fid': 'fid', 'Estat_Xarxa': 'Estat_Xarxa', 'Tipologia actual': 'Tipologia actual', 'Longitud': 'Longitud', 'Jerarquia': 'Jerarquia', 'Titular': 'Titular', 'Ciclabilitat quotidiana': 'Ciclabilitat quotidiana', 'Amplada': 'Amplada', 'Segregació': 'Segregació', 'Paviment': 'Paviment', 'Paviment diferenciat': 'Paviment diferenciat', 'Estat paviment': 'Estat paviment', 'Convivencia vianants': 'Convivencia vianants', 'Trànsit': 'Trànsit', 'Velocitat': 'Velocitat', 'Pesants': 'Pesants', 'Senyalització prioritat bici': 'Senyalització prioritat bici', 'Senyalització orientació bici': 'Senyalització orientació bici', 'Enllumenat': 'Enllumenat', 'Propostes WEB': 'Propostes WEB', 'Projectes': 'Projectes', 'Fase 1 Infraestructura': 'Fase 1 Infraestructura', 'Fase 1 Senyalització': 'Fase 1 Senyalització', 'Tipologia de solucio': 'Tipologia de solucio', 'Accions infraestructura': 'Accions infraestructura', 'Fase 2': 'Fase 2', 'Fase 1_Seleccio': 'Fase 1_Seleccio', 'Eix connector': 'Eix connector', });
-lyr_Nuclisdepoblaci.set('fieldAliases', {'fid': 'fid', 'Nom': 'Nom', 'Jerarquia': 'Jerarquia', });
+lyr_NodesdepoblaciAltPeneds.set('fieldAliases', {'TIPUS_CAP': 'TIPUS_CAP', 'ES_CAP_PR': 'ES_CAP_PR', 'MUNICIPI': 'MUNICIPI', 'COMARCA': 'COMARCA', 'PROVINCIA': 'PROVINCIA', 'Muni_Codi': 'Muni_Codi', 'Nom munici': 'Nom munici', 'Homes': 'Homes', 'Dones': 'Dones', 'Total': 'Total', 'fid': 'fid', 'Poblacio C': 'Poblacio C', 'ID TEXT': 'ID TEXT', 'POBLACIO': 'POBLACIO', });
 lyr_Llocsdintersturstic.set('fieldAliases', {'fid': 'fid', 'Tipologia': 'Tipologia', 'Nom': 'Nom', 'Comarca': 'Comarca', });
 lyr_Polgonsdactivitateconmica.set('fieldAliases', {'fid': 'fid', 'ID': 'ID', 'NOM': 'NOM', 'SUPERFICIE': 'SUPERFICIE', 'PERIMETRE': 'PERIMETRE', });
 lyr_Nodesquotidianscomarcals.set('fieldAliases', {'fid': 'fid', 'Nom': 'Nom', });
 lyr_Centreseducatius.set('fieldAliases', {'fid': 'fid', 'Codi_centre': 'Codi_centre', 'Denominació_completa': 'Denominació_completa', 'Nom_naturalesa': 'Nom_naturalesa', 'Estudis': 'Estudis', 'Nom': 'Nom', 'Tipologia': 'Tipologia', 'Naturales': 'Naturales', });
 lyr_Estacionsferroviries.set('fieldAliases', {'fid': 'fid', 'OBJECTID': 'OBJECTID', 'CODI1_ESTA': 'CODI1_ESTA', 'NOM': 'NOM', 'Comentaris': 'Comentaris', 'H23': 'H23', 'H27': 'H27', 'Estat actual': 'Estat actual', 'Operador': 'Operador', 'GENER_2024': 'GENER_2024', 'Estacions_Combinades': 'Estacions_Combinades', 'Linia': 'Linia', 'Validacions_Dia': 'Validacions_Dia', 'Corredors': 'Corredors', });
-lyr_LmitcomarcalAltPeneds.set('fieldImages', {'fid': 'TextEdit', 'CODICOMAR': 'TextEdit', 'NOMCOMAR': 'TextEdit', 'AREACOMAR': 'TextEdit', 'DATAALTA': 'TextEdit', 'layerObject': 'Hidden', 'idO': 'Hidden'});
-lyr_Viari.set('fieldImages', {'ID': 'TextEdit', 'CODIVIA': 'TextEdit', 'DENOMINACI': 'TextEdit', 'INICI': 'TextEdit', 'FINAL': 'TextEdit', 'CODIEUROPA': 'TextEdit', 'COMARCA': 'TextEdit', 'TITULAR': 'TextEdit', 'FUNCIONAL': 'TextEdit', 'TECNICA': 'TextEdit', 'CONSERVACI': 'TextEdit', 'PATRIMONIA': 'TextEdit', 'AUTORITZA': 'TextEdit', 'DATAACTUAL': 'DateTime', 'layerObject': 'Hidden', 'idO': 'Hidden'});
 lyr_Eixosconnectors.set('fieldImages', {'fid': 'TextEdit', 'Estat_Xarxa': 'TextEdit', 'Tipologia actual': 'TextEdit', 'Longitud': 'TextEdit', 'Jerarquia': 'TextEdit', 'Titular': 'TextEdit', 'Ciclabilitat quotidiana': 'Range', 'Amplada': 'Range', 'Segregació': 'Range', 'Paviment': 'Range', 'Paviment diferenciat': 'Range', 'Estat paviment': 'Range', 'Convivencia vianants': 'Range', 'Trànsit': 'Range', 'Velocitat': 'Range', 'Pesants': 'Range', 'Senyalització prioritat bici': 'Range', 'Senyalització orientació bici': 'Range', 'Enllumenat': 'Range', 'Propostes WEB': 'Range', 'Projectes': 'TextEdit', 'Fase 1 Infraestructura': 'Range', 'Fase 1 Senyalització': 'Range', 'Tipologia de solucio': 'TextEdit', 'Accions infraestructura': 'TextEdit', 'Fase 2': 'Range', 'Fase 1_Seleccio': 'Range', 'Eix connector': 'Range', 'layerObject': 'Hidden', 'idO': 'Hidden'});
-lyr_Nuclisdepoblaci.set('fieldImages', {'fid': 'TextEdit', 'Nom': 'TextEdit', 'Jerarquia': 'Range', 'layerObject': 'Hidden', 'idO': 'Hidden'});
+lyr_NodesdepoblaciAltPeneds.set('fieldImages', {'TIPUS_CAP': 'TextEdit', 'ES_CAP_PR': 'TextEdit', 'MUNICIPI': 'TextEdit', 'COMARCA': 'TextEdit', 'PROVINCIA': 'TextEdit', 'Muni_Codi': 'TextEdit', 'Nom munici': 'TextEdit', 'Homes': 'TextEdit', 'Dones': 'TextEdit', 'Total': 'TextEdit', 'fid': 'TextEdit', 'Poblacio C': 'TextEdit', 'ID TEXT': 'TextEdit', 'POBLACIO': 'TextEdit', 'layerObject': 'Hidden', 'idO': 'Hidden'});
 lyr_Llocsdintersturstic.set('fieldImages', {'fid': 'TextEdit', 'Tipologia': 'TextEdit', 'Nom': 'TextEdit', 'Comarca': '', 'layerObject': 'Hidden', 'idO': 'Hidden'});
 lyr_Polgonsdactivitateconmica.set('fieldImages', {'fid': 'TextEdit', 'ID': 'TextEdit', 'NOM': 'TextEdit', 'SUPERFICIE': 'TextEdit', 'PERIMETRE': 'TextEdit', 'layerObject': 'Hidden', 'idO': 'Hidden'});
 lyr_Nodesquotidianscomarcals.set('fieldImages', {'fid': 'TextEdit', 'Nom': 'TextEdit', 'layerObject': 'Hidden', 'idO': 'Hidden'});
 lyr_Centreseducatius.set('fieldImages', {'fid': 'TextEdit', 'Codi_centre': 'TextEdit', 'Denominació_completa': 'TextEdit', 'Nom_naturalesa': 'TextEdit', 'Estudis': 'TextEdit', 'Nom': 'TextEdit', 'Tipologia': 'TextEdit', 'Naturales': 'TextEdit', 'layerObject': 'Hidden', 'idO': 'Hidden'});
 lyr_Estacionsferroviries.set('fieldImages', {'fid': 'TextEdit', 'OBJECTID': 'TextEdit', 'CODI1_ESTA': 'TextEdit', 'NOM': 'TextEdit', 'Comentaris': 'TextEdit', 'H23': 'Range', 'H27': 'Range', 'Estat actual': 'TextEdit', 'Operador': 'TextEdit', 'GENER_2024': 'Range', 'Estacions_Combinades': 'TextEdit', 'Linia': 'TextEdit', 'Validacions_Dia': 'Range', 'Corredors': 'TextEdit', 'layerObject': 'Hidden', 'idO': 'Hidden'});
-lyr_LmitcomarcalAltPeneds.set('fieldLabels', {'fid': 'no label', 'CODICOMAR': 'no label', 'NOMCOMAR': 'no label', 'AREACOMAR': 'no label', 'DATAALTA': 'no label', });
-lyr_Viari.set('fieldLabels', {'ID': 'hidden field', 'CODIVIA': 'no label', 'DENOMINACI': 'no label', 'INICI': 'no label', 'FINAL': 'no label', 'CODIEUROPA': 'no label', 'COMARCA': 'no label', 'TITULAR': 'no label', 'FUNCIONAL': 'no label', 'TECNICA': 'no label', 'CONSERVACI': 'no label', 'PATRIMONIA': 'no label', 'AUTORITZA': 'no label', 'DATAACTUAL': 'no label', });
-lyr_Eixosconnectors.set('fieldLabels', {'fid': 'hidden field', 'Estat_Xarxa': 'hidden field', 'Tipologia actual': 'inline label - visible with data', 'Longitud': 'hidden field', 'Jerarquia': 'hidden field', 'Titular': 'hidden field', 'Ciclabilitat quotidiana': 'hidden field', 'Amplada': 'hidden field', 'Segregació': 'hidden field', 'Paviment': 'hidden field', 'Paviment diferenciat': 'hidden field', 'Estat paviment': 'hidden field', 'Convivencia vianants': 'hidden field', 'Trànsit': 'hidden field', 'Velocitat': 'hidden field', 'Pesants': 'hidden field', 'Senyalització prioritat bici': 'hidden field', 'Senyalització orientació bici': 'hidden field', 'Enllumenat': 'hidden field', 'Propostes WEB': 'hidden field', 'Projectes': 'hidden field', 'Fase 1 Infraestructura': 'no label', 'Fase 1 Senyalització': 'no label', 'Tipologia de solucio': 'no label', 'Accions infraestructura': 'no label', 'Fase 2': 'no label', 'Fase 1_Seleccio': 'no label', 'Eix connector': 'no label', });
-lyr_Nuclisdepoblaci.set('fieldLabels', {'fid': 'hidden field', 'Nom': 'no label', 'Jerarquia': 'hidden field', });
+lyr_Eixosconnectors.set('fieldLabels', {'fid': 'hidden field', 'Estat_Xarxa': 'inline label - visible with data', 'Tipologia actual': 'inline label - visible with data', 'Longitud': 'hidden field', 'Jerarquia': 'hidden field', 'Titular': 'hidden field', 'Ciclabilitat quotidiana': 'hidden field', 'Amplada': 'hidden field', 'Segregació': 'hidden field', 'Paviment': 'hidden field', 'Paviment diferenciat': 'hidden field', 'Estat paviment': 'hidden field', 'Convivencia vianants': 'hidden field', 'Trànsit': 'hidden field', 'Velocitat': 'hidden field', 'Pesants': 'hidden field', 'Senyalització prioritat bici': 'hidden field', 'Senyalització orientació bici': 'hidden field', 'Enllumenat': 'hidden field', 'Propostes WEB': 'hidden field', 'Projectes': 'hidden field', 'Fase 1 Infraestructura': 'hidden field', 'Fase 1 Senyalització': 'hidden field', 'Tipologia de solucio': 'inline label - visible with data', 'Accions infraestructura': 'hidden field', 'Fase 2': 'hidden field', 'Fase 1_Seleccio': 'hidden field', 'Eix connector': 'inline label - visible with data', });
+lyr_NodesdepoblaciAltPeneds.set('fieldLabels', {'TIPUS_CAP': 'no label', 'ES_CAP_PR': 'no label', 'MUNICIPI': 'no label', 'COMARCA': 'no label', 'PROVINCIA': 'no label', 'Muni_Codi': 'no label', 'Nom munici': 'no label', 'Homes': 'no label', 'Dones': 'no label', 'Total': 'no label', 'fid': 'no label', 'Poblacio C': 'no label', 'ID TEXT': 'no label', 'POBLACIO': 'no label', });
 lyr_Llocsdintersturstic.set('fieldLabels', {'fid': 'hidden field', 'Tipologia': 'hidden field', 'Nom': 'no label', 'Comarca': 'hidden field', });
 lyr_Polgonsdactivitateconmica.set('fieldLabels', {'fid': 'hidden field', 'ID': 'hidden field', 'NOM': 'no label', 'SUPERFICIE': 'hidden field', 'PERIMETRE': 'hidden field', });
 lyr_Nodesquotidianscomarcals.set('fieldLabels', {'fid': 'hidden field', 'Nom': 'no label', });
